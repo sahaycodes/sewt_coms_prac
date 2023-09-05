@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Faculty Zone</title>
+</head>
+<body class="light-mode">
+    <header>
+        <div class="college-logo">
+            <img src="fr.crce logo.png" alt="Logo">
+        </div>
+        
+        <nav class="nav-links">
+            <a href="#profile" class="nav-link">Profile</a>
+            <a href="#aboutus" class="nav-link">About Us</a>
+            <a href="#notice" class="nav-link">Notice</a>
+        </nav>
+        <div class="profile">
+            <img src="gojo.png" alt="Faculty Profile">
+            <h2>Mr. Gojo Satoru</h2>
+        </div>
+    </header>
+    <div id="content">
+    <main>
+        <div class="classroom-list" id="classroom-list">
+            <!-- Classes will be dynamically added here -->
+        </div>
+    </main>
+    </div>
+    <div id="student-list">
+
+    </div>
+    <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">🌙</button>
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <div class="copyright text-center">
+                Made 
+                <i class="bi bi-heart-fill" style="color:red;"></i>
+                by 
+                <strong style="color:#2796ff; display:block; margin-top:10px;">Shreya Sahay, Saaqib Shaikh, and Keefe Pereira</strong>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const facultyMem = [
+            {
+                id: 1,
+                name: 'Mr. Gojo Satoru',
+                classrooms: [
+                    { id: 1, name: 'MPMC SEM IV', students: 70, subject: 'Microprocessors and Microcontrollers' },
+                    { id: 2, name: 'COA SEM V', students: 70, subject: 'Computer Organization and Architecture' },
+                    { id: 3, name: 'DE SEM III', students: 65, subject: 'Something' },
+                    { id: 4, name: 'VLSI SEM VII', students: 70, subject: 'VLSI Design' },
+                ]
+            }
+        ];
+
+        const classroomList = document.getElementById('classroom-list');
+
+        facultyMem[0].classrooms.forEach(classroom => {
+            const classroomDiv = document.createElement('div');
+            classroomDiv.classList.add('classroom');
+
+            const classroomTitle = document.createElement('h2');
+            classroomTitle.textContent = classroom.name;
+
+            const classInfo = document.createElement('p');
+            classInfo.classList.add('class-info');
+            classInfo.textContent = `Students: ${classroom.students}`;
+
+            const subjectDesc = document.createElement('p');
+            subjectDesc.classList.add('subject-description');
+            subjectDesc.textContent = `Subject: ${classroom.subject}`;
+
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => {
+                console.log(`Edit button clicked for class ${classroom.name}`);
+
+                const studentList = document.getElementById('student-list');
+                studentList.innerHTML = '';
+
+                const students = classroom.students;
+
+                if (students && students.length > 0) {
+                    const courseName=encodeURIComponent(classroom.name);
+                    window.location.href=`studlist.html?class=${classroom.name}`;
+
+                } else {
+
+                    const studList=document.getElementById('student-list');
+                    studentList.innerHTML='';
+
+
+                    const noStudentsMessage = document.createElement('p');
+                    noStudentsMessage.textContent = 'No students enrolled in this course as of now.';
+                    noStudentsMessage.classList.add('no-student-alert');
+                    studentList.appendChild(noStudentsMessage);
+
+                    alert('No students are enrolled in this course/program.');
+                }
+            });
+
+            const viewBut = document.createElement('button');
+            viewBut.textContent = 'View';
+            viewBut.addEventListener('click', () => {
+                console.log(`View button activated for class ${classroom.name}`);
+            });
+
+            classroomDiv.appendChild(classroomTitle);
+            classroomDiv.appendChild(classInfo);
+            classroomDiv.appendChild(subjectDesc);
+            classroomDiv.appendChild(editButton);
+            classroomDiv.appendChild(viewBut);
+
+            classroomList.appendChild(classroomDiv);
+        });
+
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            darkModeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+
+        const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (userPrefersDark) {
+            body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️';
+        }
+    </script>
+    
+</body>
+</html>

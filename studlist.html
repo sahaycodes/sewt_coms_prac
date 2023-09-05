@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Student List</title>
+    <style>
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            background-color: #ffff;
+            margin:0;
+            padding:0;
+        }
+        .light-mode{
+            background-color:#ffff;
+            color:#333;
+
+        }
+        .dark-mode{
+            background-color: #333;
+            color:white;
+        }
+        header{
+            background-color:#2796ff;
+            color:white;
+            padding:10px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        
+        #content{
+            margin:20px;
+            padding:20px;
+            background-color:white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .student-list {
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #2796ff;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        #dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 24px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        #footer {
+            background-color: #2796ff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .copyright i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <header>
+        <h1>Student List</h1>
+
+        <div class="college-logo">
+            <img src="fr.crce logo.png" alt="Logo">
+        </div>
+    </header>
+    <div id="content">
+    <main>
+        <div id="student-list">
+            <!-- Student list will be dynamically added here -->
+        </div>
+    </main>
+    </div>
+    </body>
+    <button id="go-back-button">Go Back</button>
+    <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">🌙</button>
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+            <div class="copyright text-center">
+                Made by SEWT D5
+                <strong style="color:#333; display:block; margin-top:10px;">Shreya Sahay,Saaqib Shaikh and Keefe Pereira</strong>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript code to retrieve the course name from the URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseName = urlParams.get('class');
+
+        //displaying the course name on the page
+        const courseNameElement = document.createElement('h2');
+        courseNameElement.textContent=`Course: ${decodeURIComponent(courseName)}`;
+        document.getElementById('content').appendChild(courseNameElement);
+        // Dummy student data for demonstration (you should replace this with your actual data)
+        const studentsData = [
+            { id: 1, name: 'Student 1' },
+            { id: 2, name: 'Student 2' },
+            { id: 3, name: 'Student 3' },
+            // Add more student data as needed
+        ];
+
+
+        const studentListUl = document.createElement('ul');
+        students.forEach(student => {
+            const studentListItem = document.createElement('li');
+            studentListItem.textContent = student;
+            studentListUl.appendChild(studentListItem);
+        });
+        studentList.appendChild(studentListUl);
+
+        function toggleDarkMode(){
+            const body=document.body;
+            body.classList.toggle('dark-mode');
+        }
+
+       const darkModeToggle=document.getElementById('dark-mode-toggle');
+       darkModeToggle.addEventListener('click',toggleDarkMode);
+    </script>
+</body>
+</html>
